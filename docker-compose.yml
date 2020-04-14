@@ -1,0 +1,12 @@
+version: "3.3"
+
+services:
+  express-api-template:
+    container_name: express-api-template
+    build: ./server/
+    volumes:
+      - ./server:/server
+      - /server/node_modules
+    ports:
+      - "1337:1337"
+    restart: always
