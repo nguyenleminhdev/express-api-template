@@ -1,5 +1,6 @@
 FROM node:lts-alpine
 RUN npm install -g pm2
+RUN pm2 install pm2-logrotate
 RUN mkdir -p /server
 WORKDIR /server
 COPY package.json /server/

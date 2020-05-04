@@ -15,6 +15,12 @@ class Server {
         require('./api/response/err')(this)
     }
 
+    _database() {
+        require('./config/database')(this)
+
+        require('./api/models/Conversation')(this)
+        require('./api/models/Message')(this)
+    }
     _useMiddleware() {
         require('./config/http')(this)
         require('./config/log')(this)
@@ -22,17 +28,21 @@ class Server {
     }
     _makeRouter() {
         require('./api/controller/publicController')(this)
+
         require('./config/blueprint')(this)
         require('./config/router')(this)
     }
     _doListen() {
-        this.server.listen(
-            this.PORT,
-            () => console.log(`Server start on port: ${this.PORT}`.blue)
-        )
+        this.connectDB(() => {
+            this.server.listen(
+                this.PORT,
+                () => console.log(`Server start on port: ${this.PORT}`.blue)
+            )
+        })
     }
 
     init() {
+        this._database()
         this._useMiddleware()
         this._makeRouter()
         this._doListen()

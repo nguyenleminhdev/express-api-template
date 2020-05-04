@@ -7,4 +7,6 @@ module.exports = self => {
     self._ = require('lodash')
     self.colors = require('colors')
     self.path = require('path')
+    self.mongoose = require('mongoose')
+    self.web_socket = require('ws')
 }
