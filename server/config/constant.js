@@ -6,6 +6,9 @@ module.exports = self => {
         },
         DATABASE: {
             URI: 'mongodb://localhost:27017/database'
+        },
+        APP: {
+            PORT: process.env.PORT || 1337
         }
     }
 }

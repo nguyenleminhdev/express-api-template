@@ -2,29 +2,34 @@ class Server {
     app; router; PORT; server;
     path;
     ok; err;
-    constructor(PORT = process.env.PORT || 1337) {
+    constructor() {
         require('./config/global')(this)
+        require('./config/constant')(this)
 
         this.app = this.express()
         this.router = this.express.Router()
-        this.PORT = PORT
-
-        require('./config/socket')(this)
-
-        require('./api/response/ok')(this)
-        require('./api/response/err')(this)
+        this.PORT = this.constant.APP.PORT
     }
 
     _database() {
         require('./config/database')(this)
-
+        ///////
         require('./api/models/Conversation')(this)
         require('./api/models/Message')(this)
     }
     _useMiddleware() {
+        require('./config/socket')(this)
         require('./config/http')(this)
         require('./config/log')(this)
         require('./config/view')(this)
+        ////////
+        require('./api/response/ok')(this)
+        require('./api/response/err')(this)
+    }
+    _policy() {
+        require('./api/policy/test1Policy')(this)
+        ////////
+        require('./config/policy')(this)
     }
     _makeRouter() {
         require('./api/controller/publicController')(this)
@@ -44,6 +49,7 @@ class Server {
     init() {
         this._database()
         this._useMiddleware()
+        this._policy()
         this._makeRouter()
         this._doListen()
     }
