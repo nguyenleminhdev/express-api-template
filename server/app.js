@@ -22,6 +22,7 @@ class Server {
         require('./config/http')(this)
         require('./config/log')(this)
         require('./config/view')(this)
+        require('./config/security')(this)
         ////////
         require('./api/response/ok')(this)
         require('./api/response/err')(this)
