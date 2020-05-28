@@ -9,4 +9,11 @@ module.exports = self => {
     self.path = require('path')
     self.mongoose = require('mongoose')
     self.web_socket = require('ws')
+    self.request = require('request')
+    self.fs = require('fs')
+    self.path = require('path')
+    self.redis = require('redis')
+    self.uuid = require('uuid')
+    self.jwt = require('jsonwebtoken')
+    self.jwt_decode = require('jwt-decode')
 }

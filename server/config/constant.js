@@ -1,19 +1,38 @@
 module.exports = self => {
     self.constant = {
-        FACEBOOK: {
-            SECRET: '123456',
-            PAGE_SECRET: 'EAAQAKQmSbv4BAHjBOpjPfbkCVhBZCINyZA3OjNtf9uuoqUtUCfeVXK7o9ZAQmLYgRtyytxV9OfOGypzoZBQzfhhyxxFcmxK60ryNA3WhHyhEwH16hfdwysEY3XF5VLjoNZBhZAytaFtnevkOor0AuX1PQcHWUF6Fd4p6KHLMNCUQZDZD',
-        },
         DATABASE: {
             PRODUCTION: {
-                URI: 'mongodb://localhost:27017/database'
+                MONGO_DB: 'mongodb://localhost:27017/database',
+                REDIS: 'redis://localhost:6379/0'
             },
             DEVELOPMENT: {
-                URI: 'mongodb://localhost:27017/database'
+                MONGO_DB: 'mongodb://localhost:27017/database',
+                REDIS: 'redis://localhost:6379/0'
             }
         },
         APP: {
-            PORT: process.env.PORT || 1337
+            PRODUCTION: {
+                PORT: process.env.PORT || 1337,
+                IMAGE_PATH: 'http://localhost:1337/image',
+                IP: '127.0.0.1',
+                SOCKET_ADAPTER: 'SOCKET.IO'
+            },
+            DEVELOPMENT: {
+                PORT: process.env.PORT || 1337,
+                IMAGE_PATH: 'http://localhost:1337/image',
+                IP: '127.0.0.1',
+                SOCKET_ADAPTER: 'WS'
+            }
+        },
+        JWT: {
+            PRODUCTION: {
+                SECRET: '12345',
+                DEFAULT_EXPIRE: 24 * 60 * 60 * 1 // 1 ngay
+            },
+            DEVELOPMENT: {
+                SECRET: 'chatbox123!@#',
+                DEFAULT_EXPIRE: 24 * 60 * 60 * 1 // 1 ngay
+            }
         }
     }
 }
