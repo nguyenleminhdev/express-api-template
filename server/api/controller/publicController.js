@@ -2,10 +2,10 @@ module.exports = self => {
     self.router.all('/public/ping', (req, res) => {
         self.ok(res, 'pong')
     })
-    self.router.all('/public/500', (req, res) => {
+    self.router.all('/public/500', () => {
         throw new Error('this is error message!')
     })
-    self.router.all(`/public/socketio`, (req, res) => {
+    self.router.all('/public/socketio', (req, res) => {
         let p = { ...req.query, ...req.body }
         if (!p.event || !p.message) return self.err(res, 'REQUIRED_PARAMS')
 
