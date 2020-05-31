@@ -3,15 +3,14 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Document</title>
+        <title>Test WS.js</title>
     </head>
     <body>
-        <script> 
-            // const ws = new WebSocket('ws://localhost:1337')
-            const ws = new WebSocket('wss://chatbox-webhook.botbanhang.vn')
+        <script>
+            const ws = new WebSocket('ws://localhost:1337')
 
             ws.onmessage = function (event) {
-                let data = event.data 
+                let data = event.data
                 try {
                     data = JSON.parse(data)
                 } catch (e) {}

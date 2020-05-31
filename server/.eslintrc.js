@@ -1,23 +1,23 @@
 module.exports = {
-    'env': {
-        'commonjs': true,
-        'es6': true,
-        'node': true
+    env: {
+        commonjs: true,
+        es6: true,
+        node: true
     },
-    'extends': 'eslint:recommended',
-    'globals': {
-        'Atomics': 'readonly',
-        'SharedArrayBuffer': 'readonly'
+    extends: 'eslint:recommended',
+    globals: {
+        Atomics: 'readonly',
+        SharedArrayBuffer: 'readonly'
     },
-    'parserOptions': {
-        'ecmaVersion': 11
+    parserOptions: {
+        ecmaVersion: 11
     },
-    'rules': {
-        'quotes': [
+    rules: {
+        quotes: [
             'error',
             'single'
         ],
-        'indent': [
+        indent: [
             'error',
             4
         ],
@@ -25,7 +25,7 @@ module.exports = {
             'error',
             'unix'
         ],
-        'semi': [
+        semi: [
             2,
             'never'
         ],
@@ -36,6 +36,12 @@ module.exports = {
         eqeqeq: [
             'error',
             'always'
+        ],
+        'no-unused-vars': [
+            'error', 
+            { 
+                args: 'none'
+            }
         ]
     }
 }

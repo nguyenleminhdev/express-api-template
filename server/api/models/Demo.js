@@ -1,5 +1,5 @@
 module.exports = self => {
-    let ConversationSchema = new self.mongoose.Schema(
+    let DemoSchema = new self.MONGO_DB.DB_1.Schema(
         {
             page_id: {
                 type: String,
@@ -15,5 +15,5 @@ module.exports = self => {
         }
     )
 
-    self.Conversation = self.mongoose.model('Conversation', ConversationSchema)
+    self.Demo = self.MONGO_DB.DB_1.model('Demo', DemoSchema)
 }

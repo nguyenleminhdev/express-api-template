@@ -1,8 +1,8 @@
 version: "3.3"
 
 services:
-  express-api-template:
-    container_name: express-api-template
+  express-api-template-v2:
+    container_name: express-api-template-v2
     build: ./server/
     volumes:
       - ./server:/server
