@@ -7,4 +7,4 @@ COPY package.json /server/
 RUN npm install
 COPY . /server
 EXPOSE 1337
-CMD ["pm2", "start", "processes.json", "--no-daemon"]
+CMD ["pm2", "start", "pm2.json", "--no-daemon"]
