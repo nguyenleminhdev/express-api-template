@@ -29,6 +29,10 @@ class Server {
     init() {
         this.async.waterfall([
             (next) => {
+                require('./configs/sencurity')(this)
+                next()
+            },
+            (next) => {
                 this.glob
                     .sync('./api/*(policies)/*.js')
                     .map(file => require(this.path.resolve(file))(this))
@@ -36,7 +40,7 @@ class Server {
             },
             (next) => {
                 this.glob
-                    .sync('./configs/*.js')
+                    .sync('./configs/!(sencurity).js')
                     .map(file => require(this.path.resolve(file))(this))
                 next()
             },
