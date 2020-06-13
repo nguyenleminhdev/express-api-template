@@ -24,12 +24,15 @@ class Server {
         this.uuid = require('uuid')
         this.bcryptjs = require('bcryptjs')
         this.aes256 = require('aes256')
+        this.multer = require('multer')
     }
 
     init() {
         this.async.waterfall([
             (next) => {
-                require('./configs/sencurity')(this)
+                this.glob
+                    .sync('./configs/*(static|sencurity).js')
+                    .map(file => require(this.path.resolve(file))(this))
                 next()
             },
             (next) => {
@@ -40,7 +43,7 @@ class Server {
             },
             (next) => {
                 this.glob
-                    .sync('./configs/!(sencurity).js')
+                    .sync('./configs/!(static|sencurity).js')
                     .map(file => require(this.path.resolve(file))(this))
                 next()
             },

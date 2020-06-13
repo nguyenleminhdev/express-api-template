@@ -19,6 +19,17 @@ module.exports = self => {
                         )
                 }
             ], (e, r) => (e) ? proceed(e) : proceed())
+        },
+        UPLOAD: (req, location, iteratee, next) => {
+            self.multer({
+                storage: self.multer.diskStorage({
+                    destination: (req, file, next) => next(null, location),
+                    filename: iteratee
+                }),
+                limits: {
+                    fileSize: 30000000
+                }
+            }).single('file')(req, null, e => (e) ? next(e) : next(null, req))
         }
     }
 }
