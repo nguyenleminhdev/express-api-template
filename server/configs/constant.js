@@ -22,7 +22,10 @@ const PRODUCTION = {
         }
     },
     LOG: {
-        LEVEL: 'none'
+        LEVEL: 'none',
+        SERVER: 'http://localhost:9200',
+        INDEX: 'chatbox-local',
+        NODE: 'node_1'
     },
     JWT: {
         SECRET: '123456',
@@ -56,7 +59,10 @@ const DEVELOPMENT = {
         }
     },
     LOG: {
-        LEVEL: 'dev'
+        LEVEL: 'dev',
+        SERVER: 'http://localhost:9200',
+        INDEX: 'chatbox-local',
+        NODE: 'node_1'
     },
     JWT: {
         SECRET: '123456',

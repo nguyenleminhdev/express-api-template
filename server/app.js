@@ -25,6 +25,8 @@ class Server {
         this.bcryptjs = require('bcryptjs')
         this.aes256 = require('aes256')
         this.multer = require('multer')
+        this.winston = require('winston')
+        this.winston_elasticsearch = require('winston-elasticsearch')
     }
 
     init() {
@@ -58,8 +60,8 @@ class Server {
             },
             (next) => this.listen(() => next())
         ], e => {
-            if (e) return console.log(`Error on start server: ${JSON.stringify(e, null, 4)}`.red)
-            console.log('Start server sucessfuly'.cyan)
+            if (e) return this.log.error(`Error on start server: ${JSON.stringify(e, null, 4)}`)
+            this.log.info('Start server sucessfuly')
         })
     }
 }
