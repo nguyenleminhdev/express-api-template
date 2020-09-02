@@ -1,8 +1,8 @@
 /*******************************************************************************
- * 
- * * Serve static file config
- * 
+ * * Check token
  ******************************************************************************/
 
-const PATH = path.join(process.cwd(), Constant.STATIC.PATH)
-App.use(express.static(PATH))
+module.exports = (req, res, proceed) => {
+    console.log('check token')
+    proceed()
+}

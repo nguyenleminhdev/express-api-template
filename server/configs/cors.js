@@ -1,8 +1,11 @@
 /*******************************************************************************
  * 
- * * Serve static file config
+ * * Cross-Origin Resource Sharing config
  * 
  ******************************************************************************/
 
-const PATH = path.join(process.cwd(), Constant.STATIC.PATH)
-App.use(express.static(PATH))
+const cors = require('cors')
+
+const CONFIG_CORS = cors(Constant.CORS)
+
+App.use(CONFIG_CORS)

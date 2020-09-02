@@ -1,72 +1,33 @@
-class Server {
-    constructor() {
-        this.express = require('express')
-        this.app = this.express()
-        this.router = this.express.Router()
-        this.server = require('http').Server(this.app)
-        this.fs = require('fs')
-        this.path = require('path')
-        this.async = require('async')
-        this._ = require('lodash')
-        this.colors = require('colors')
-        this.morgan = require('morgan')
-        this.glob = require('glob')
-        this.request = require('request')
-        this.mongoose = require('mongoose')
-        this.redis = require('redis')
-        this.socket_io = require('socket.io')
-        this.ws = require('ws')
-        this.cors = require('cors')
-        this.body_parser = require('body-parser')
-        this.elasticsearch = require('elasticsearch')
-        this.jsonwebtoken = require('jsonwebtoken')
-        this.jwt_decode = require('jwt-decode')
-        this.uuid = require('uuid')
-        this.bcryptjs = require('bcryptjs')
-        this.aes256 = require('aes256')
-        this.multer = require('multer')
-        this.winston = require('winston')
-        this.winston_elasticsearch = require('winston-elasticsearch')
-    }
+/*******************************************************************************
+ * * app.js
+ * 
+ * To start the server development, run: `npm start`.
+ * To start the server production, try:
+ *  => node app.js --node_env=production
+ *  => pm2 start pm2.json
+ *  => docker-compose up --build -d
+ * 
+ ******************************************************************************/
 
-    init() {
-        this.async.waterfall([
-            (next) => {
-                this.glob
-                    .sync('./configs/*(static|sencurity).js')
-                    .map(file => require(this.path.resolve(file))(this))
-                next()
-            },
-            (next) => {
-                this.glob
-                    .sync('./api/*(policies)/*.js')
-                    .map(file => require(this.path.resolve(file))(this))
-                next()
-            },
-            (next) => {
-                this.glob
-                    .sync('./configs/!(static|sencurity).js')
-                    .map(file => require(this.path.resolve(file))(this))
-                next()
-            },
-            (next) => this.connect_mongo_db(e => (e) ? next(e) : next()),
-            (next) => this.connect_redis(e => (e) ? next(e) : next()),
-            (next) => this.connect_elastic_search(e => (e) ? next(e) : next()),
-            (next) => {
-                this.glob
-                    .sync('./api/*(controllers|models|response|services)/*.js')
-                    .map(file => require(this.path.resolve(file))(this))
-                next()
-            },
-            (next) => this.listen(() => next())
-        ], e => {
-            if (e) return this.log.error(`Error on start server: ${JSON.stringify(e, null, 4)}`)
-            this.log.info('Start server sucessfuly')
+const NODE_ENV = process.env.NODE_ENV || 'development'
 
-            console.log(this.log)
-        })
-    }
+// Import server configs
+require(`./configs/env/${NODE_ENV}`)
+require('./configs/console-log')
+
+try {
+    // Start server
+    require('./configs/global')
+    require('./configs/static')
+    require('./configs/cors')
+    require('./configs/body-parser')
+    require('./configs/logs-request')
+    require('./configs/database')
+    require('./configs/model')
+    require('./configs/policy')
+    require('./configs/router')
+    require('./configs/server')
+    require('./configs/bootstrap')
+} catch (e) {
+    log.error(`Server error: ${e.message}`)
 }
-
-const SERVER = new Server()
-SERVER.init()
