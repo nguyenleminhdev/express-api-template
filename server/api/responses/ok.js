@@ -1,8 +1,9 @@
 /*******************************************************************************
- * 
- * * Serve static file config
- * 
+ * * Custom response ok
  ******************************************************************************/
 
-const PATH = path.join(process.cwd(), Constant.STATIC.PATH)
-App.use(express.static(PATH))
+module.exports = function (data, code = 200) {
+    return this
+        .status(code)
+        .json({ code, data })
+}

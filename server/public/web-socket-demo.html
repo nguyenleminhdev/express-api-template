@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Demo web socket</title>
+    </head>
+    <body>
+        <script>
+            function socket () {
+                var ws = new WebSocket('ws://localhost:1337')
+
+                ws.onopen = function (event) {
+                    console.log('[+] : Server connected')
+                    ws.send('Client ping server')
+                }
+                ws.onmessage = function (event) {
+                    var data = event.data
+                    console.log('[>>] : Server message:', JSON.stringify(event.data, null, 4))
+                }
+                ws.onerror = function (event) {
+                    console.log('[x] : Connect error: ', event)
+                }
+                ws.onclose = function (event) {
+                    console.log('[-] : Server disconnect')
+
+                    setTimeout(function () {
+                        console.log('[<>] : Reconnect server')
+                        socket()
+                    }, 500)
+                }
+            }
+
+            socket()
+    </script>
+    </body>
+</html>

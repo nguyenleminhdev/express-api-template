@@ -1,8 +1,10 @@
 /*******************************************************************************
  * 
- * * Serve static file config
+ * * Config model
  * 
  ******************************************************************************/
 
-const PATH = path.join(process.cwd(), Constant.STATIC.PATH)
-App.use(express.static(PATH))
+glob
+    .sync(['api/models/**'])
+    .filter(n => n.includes('.js'))
+    .forEach(n => require(path.resolve(n)))

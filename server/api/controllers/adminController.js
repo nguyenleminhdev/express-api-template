@@ -1,8 +1,10 @@
 /*******************************************************************************
- * 
- * * Serve static file config
- * 
+ * * /admin/
  ******************************************************************************/
 
-const PATH = path.join(process.cwd(), Constant.STATIC.PATH)
-App.use(express.static(PATH))
+module.exports = {
+    'ping': (req, res) => {
+        let p = req.allParams()
+        res.ok(p)
+    },
+}

@@ -1,8 +1,10 @@
 /*******************************************************************************
  * 
- * * Serve static file config
+ * * Body parser config
  * 
  ******************************************************************************/
 
-const PATH = path.join(process.cwd(), Constant.STATIC.PATH)
-App.use(express.static(PATH))
+const body_parser = require('body-parser')
+
+App.use(body_parser.urlencoded({ extended: false }))
+App.use(body_parser.json())
