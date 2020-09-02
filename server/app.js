@@ -62,6 +62,8 @@ class Server {
         ], e => {
             if (e) return this.log.error(`Error on start server: ${JSON.stringify(e, null, 4)}`)
             this.log.info('Start server sucessfuly')
+
+            console.log(this.log)
         })
     }
 }

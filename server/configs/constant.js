@@ -61,7 +61,7 @@ const DEVELOPMENT = {
     LOG: {
         LEVEL: 'dev',
         SERVER: 'http://localhost:9200',
-        INDEX: 'chatbox-local',
+        INDEX: 'chatbox-local-1',
         NODE: 'node_1'
     },
     JWT: {
