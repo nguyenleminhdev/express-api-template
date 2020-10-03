@@ -29,19 +29,23 @@ const JSON_FORMAT = printf(info => {
     return info
 })
 
-const ES_TRANSPORT = new winston_elasticsearch({
-    level: Constant.LOG.ES_TRANSPORT.LEVEL,
-    index: Constant.LOG.ES_TRANSPORT.INDEX,
-    client: elasticsearch.Client({ hosts: Constant.LOG.ES_TRANSPORT.CLIENT }),
-    transformer: ES_TRANFORMER
-})
 const CONSOLE_TRANSPORT = new transports.Console({
     format: combine(colorize(), simple())
 })
 
 let list_transports = [CONSOLE_TRANSPORT]
+let es_transport
 
-if (Constant.LOG.ES_TRANSPORT) list_transports.push(ES_TRANSPORT)
+if (Constant.LOG.ES_TRANSPORT) {
+    es_transport = new winston_elasticsearch({
+        level: Constant.LOG.ES_TRANSPORT.LEVEL,
+        index: Constant.LOG.ES_TRANSPORT.INDEX,
+        client: elasticsearch.Client({ hosts: Constant.LOG.ES_TRANSPORT.CLIENT }),
+        transformer: ES_TRANFORMER
+    })
+
+    list_transports.push(es_transport)
+}
 
 global.log = createLogger({
     level: Constant.LOG.LEVEL,
@@ -56,4 +60,4 @@ global.log = createLogger({
 log.on('error', e => console.error('Winston log error: ', e))
 
 if (Constant.LOG.ES_TRANSPORT)
-    ES_TRANSPORT.on('warning', e => console.error('ES tranport warning: ', e))
+    es_transport.on('warning', e => console.error('ES tranport warning: ', e))

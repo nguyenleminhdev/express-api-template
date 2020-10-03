@@ -14,6 +14,11 @@ glob
     })
 
 glob
+    .sync(['api/bootstrap/**'])
+    .filter(n => n.includes('.js'))
+    .forEach(n => require(path.resolve(n)))
+
+glob
     .sync(['api/requests/**'])
     .filter(n => n.includes('.js'))
     .forEach(n => {

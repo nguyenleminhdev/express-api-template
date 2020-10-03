@@ -3,8 +3,6 @@
  * * Mongodb config
  ******************************************************************************/
 
-const mongoose = require('mongoose')
-
 module.exports = (database_name, connection_string) => {
     let mongodb_instance = new mongoose.Mongoose()
     mongodb_instance.connect(

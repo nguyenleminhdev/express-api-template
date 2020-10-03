@@ -12,6 +12,7 @@ global.App = express()
 global.Router = express.Router()
 global.path = require('path')
 global.Server = require('http').Server(App)
+global.mongoose = require('mongoose')
 
 // Default effective module
 global.async = require('async')
