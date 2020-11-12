@@ -163,5 +163,12 @@ global.Constant = {
     JWT: {
         SECRET: '123456',
         TIME: 60 * 60 * 24 * 30 * 12 * 2 // 2 year
+    },
+
+    MAIL: {
+        google: {
+            user: 'solution.inhm@gmail.com',
+            pass: '19972011aA@2'
+        }
     }
 }

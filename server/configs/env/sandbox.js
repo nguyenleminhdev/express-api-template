@@ -156,6 +156,18 @@ global.Constant = {
             DB_1: 'http://0.0.0.0:9200',
             DB_2: 'http://0.0.0.0:9300',
             DB_3: 'http://0.0.0.0:9400'
+        },
+
+        JWT: {
+            SECRET: '123456',
+            TIME: 60 * 60 * 24 * 30 * 12 * 2 // 2 year
+        },
+
+        MAIL: {
+            google: {
+                user: 'solution.inhm@gmail.com',
+                pass: '19972011aA@2'
+            }
         }
     }
 }
