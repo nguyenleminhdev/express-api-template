@@ -1,4 +1,5 @@
 const jsonwebtoken = require('jsonwebtoken')
+const jwt_decode = require('jwt-decode')
 
 module.exports = {
     generate: (
@@ -20,5 +21,13 @@ module.exports = {
                 secret,
                 (e, r) => (e) ? next(e) : next(null, r)
             )
+    },
+
+    payload: (
+        token,
+        next
+    ) => {
+        try { next(null, jwt_decode(token)) }
+        catch (e) { next(e) }
     },
 }

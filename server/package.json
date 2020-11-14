@@ -27,6 +27,8 @@
     "winston": "^3.3.3",
     "winston-elasticsearch": "^0.7.0",
     "jsonwebtoken": "^8.5.1",
+    "jwt-decode": "^3.1.1",
+    "moment-timezone": "^0.5.31",
     "bcryptjs": "^2.4.3"
   }
 }
