@@ -4,7 +4,13 @@
  * 
  ******************************************************************************/
 
+
 const body_parser = require('body-parser')
 
-App.use(body_parser.urlencoded({ extended: false }))
-App.use(body_parser.json())
+
+module.exports = proceed => {
+    App.use(body_parser.urlencoded({ extended: false }))
+    App.use(body_parser.json())
+
+    proceed()
+}

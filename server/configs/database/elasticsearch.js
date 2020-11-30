@@ -3,7 +3,13 @@
  ******************************************************************************/
 const elasticsearch = require('elasticsearch')
 
-module.exports = (database_name, connection_string) => {
-    ELASTICSEARCH[database_name] = elasticsearch.Client({ hosts: connection_string })
-    log.info(`[Elasticsearch] : Connected at: ${connection_string}`)
+module.exports = (database_name, connection_string, proceed) => {
+    const ES_CLIENT = elasticsearch.Client({ hosts: connection_string })
+
+    ES_CLIENT.ping(
+        { requestTimeout: 3000 },
+        e => (e) ? proceed(e) : proceed()
+    )
+
+    ELASTICSEARCH[database_name] = ES_CLIENT
 }

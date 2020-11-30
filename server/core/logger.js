@@ -7,11 +7,16 @@
  *
  ******************************************************************************/
 
+
 const { format, createLogger, transports } = require('winston')
 const { printf, combine, errors, json, colorize, simple } = format
 const winston_elasticsearch = require('winston-elasticsearch')
 const elasticsearch = require('elasticsearch')
 
+
+/////////////////////
+// DEFAULT LOG FORMAT
+/////////////////////
 const ES_TRANFORMER = log_data => {
     const TRANFORMER = {}
     TRANFORMER['@timestamp'] = log_data.timestamp ? log_data.timestamp : new Date().toISOString()
@@ -24,15 +29,27 @@ const ES_TRANFORMER = log_data => {
     TRANFORMER.data = log_data.meta.data || ''
     return TRANFORMER
 }
+// DEFAULT LOG FORMAT
+/////////////////////
+
+
+///////////////////
+// HELPER FUNCTIONS
+///////////////////
 const JSON_FORMAT = printf(info => {
     if (typeof info.message === 'object') info.message = JSON.stringify(info.message, null, 4)
     return info
 })
-
 const CONSOLE_TRANSPORT = new transports.Console({
     format: combine(colorize(), simple())
 })
+// HELPER FUNCTIONS
+///////////////////
 
+
+//////////////
+// INIT ES LOG
+//////////////
 let list_transports = [CONSOLE_TRANSPORT]
 let es_transport
 
@@ -46,7 +63,13 @@ if (Constant.LOG.ES_TRANSPORT) {
 
     list_transports.push(es_transport)
 }
+// INIT ES LOG
+//////////////
 
+
+///////////////////
+// INIT CONSOLE LOG
+///////////////////
 global.log = createLogger({
     level: Constant.LOG.LEVEL,
     format: combine(
@@ -56,8 +79,19 @@ global.log = createLogger({
     ),
     transports: list_transports
 })
+// INIT CONSOLE LOG
+///////////////////
 
+
+///////////////
+// HANDLE ERROR
+///////////////
 log.on('error', e => console.error('Winston log error: ', e))
 
 if (Constant.LOG.ES_TRANSPORT)
     es_transport.on('warning', e => console.error('ES tranport warning: ', e))
+// HANDLE ERROR
+///////////////
+
+
+module.exports = proceed => proceed()

@@ -9,25 +9,24 @@
  * 
  ******************************************************************************/
 
-const NODE_ENV = process.env.NODE_ENV || 'development'
+console.clear()
 
-// Import server configs
-require(`./configs/env/${NODE_ENV}`)
-require('./configs/console-log')
+require('./configs/global')
+async.waterfall([
+    cb => require('./core/env')(cb),
+    cb => require('./core/logger.js')(cb),
+    cb => require('./core/static')(cb),
+    cb => require('./core/cors')(cb),
+    cb => require('./core/body-parser')(cb),
+    cb => require('./core/http-request-logger')(cb),
+    cb => require('./core/database')(cb),
+    cb => require('./core/model')(cb),
+    cb => require('./core/policy')(cb),
+    cb => require('./core/router')(cb),
+    cb => require('./core/server')(cb),
+], (e, r) => {
+    if (e) return log.error(`Start Server error: ${e}`)
 
-try {
-    // Start server
-    require('./configs/global')
-    require('./configs/static')
-    require('./configs/cors')
-    require('./configs/body-parser')
-    require('./configs/logs-request')
-    require('./configs/database')
-    require('./configs/model')
-    require('./configs/policy')
-    require('./configs/router')
-    require('./configs/server')
-    require('./configs/bootstrap')
-} catch (e) {
-    log.error(`Server error: ${e.message}`)
-}
+    console.table(init_log)
+    log.info('Start server successfully!')
+})

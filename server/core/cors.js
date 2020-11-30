@@ -4,8 +4,13 @@
  * 
  ******************************************************************************/
 
-const cors = require('cors')
 
+const cors = require('cors')
 const CONFIG_CORS = cors(Constant.CORS)
 
-App.use(CONFIG_CORS)
+
+module.exports = proceed => {
+    App.use(CONFIG_CORS)
+
+    proceed()
+}

@@ -1,6 +1,9 @@
 /*******************************************************************************
+ * 
  * * Web socket config
+ * 
  ******************************************************************************/
+
 
 const ws = require('ws')
 
@@ -23,18 +26,25 @@ const CLOSE = ws => {
 //////////////
 
 
-////////////////////
-// WEB SOCKET DEFINE
-////////////////////
-let wss = new ws.Server({ server: Server })
-wss.on('connection', ws => {
-    CONNECTED(ws)
-    ws.on('message', r => MESSAGE(ws, r))
-    ws.on('close', CLOSE)
-})
-global.wss = wss
-// WEB SOCKET DEFINE
-////////////////////
+module.exports = proceed => {
+    ////////////////////
+    // WEB SOCKET DEFINE
+    ////////////////////
+    let wss = new ws.Server({ server: Server })
+    wss.on('connection', ws => {
+        CONNECTED(ws)
+        ws.on('message', r => MESSAGE(ws, r))
+        ws.on('close', CLOSE)
+    })
+    wss.on('error', e => proceed(e.message))
+    global.wss = wss
+    // WEB SOCKET DEFINE
+    ////////////////////
 
 
-log.info(`[Web Socket] : Ready to connect at: ws://${Constant.APP.HOST}:${Constant.APP.PORT}`)
+    init_log.push({
+        type: 'Web Socket',
+        address: `ws://${Constant.APP.HOST}:${Constant.APP.PORT}`
+    })
+    proceed()
+}

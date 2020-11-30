@@ -4,5 +4,12 @@
  * 
  ******************************************************************************/
 
+
 const PATH = path.join(process.cwd(), Constant.STATIC.PATH)
-App.use(express.static(PATH))
+
+
+module.exports = proceed => {
+    App.use(express.static(PATH))
+
+    proceed()
+}

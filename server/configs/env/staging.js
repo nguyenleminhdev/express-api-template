@@ -1,12 +1,12 @@
 /*******************************************************************************
- * * Sandbox environment settings
+ * * Staging environment settings
  *
  * What you see below is a quick outline of the built-in settings you need to
- * configure your app for sandbox.  The configuration in this file is only
- * used in your sandbox environment, i.e. when you start your app using:
+ * configure your app for staging.  The configuration in this file is only
+ * used in your staging environment, i.e. when you start your app using:
  *
  * ```
- * NODE_ENV=sandbox node app
+ * NODE_ENV=staging node app
  * ```
  *
  * > If you're using git as a version control solution for your app,
@@ -43,7 +43,7 @@ global.Constant = {
 
     /***************************************************************************
      * 
-     * * Configure your security settings for sandbox.
+     * * Configure your security settings for staging.
      * 
      **************************************************************************/
     CORS: {
@@ -105,13 +105,13 @@ global.Constant = {
 
     /***************************************************************************
      * 
-     * * Tell your app what database(s) it should use in sandbox.
+     * * Tell your app what database(s) it should use in staging.
      * 
      **************************************************************************/
     DATABASE: {
 
         /***********************************************************************
-        * * Configure your MongoDB sandbox database.
+        * * Configure your MongoDB staging database.
         *
         * 1. Define database name:
         *    (For example: DB_1, DB_2, ..., DB_n)
@@ -127,7 +127,7 @@ global.Constant = {
         },
 
         /***********************************************************************
-        * * Configure your Redis sandbox database.
+        * * Configure your Redis staging database.
         *
         * 1. Define database name:
         *    (For example: DB_1, DB_2, ..., DB_n)
@@ -143,7 +143,7 @@ global.Constant = {
         },
 
         /***********************************************************************
-        * * Configure your Elastic search sandbox database.
+        * * Configure your Elastic search staging database.
         *
         * 1. Define database name:
         *    (For example: DB_1, DB_2, ..., DB_n)

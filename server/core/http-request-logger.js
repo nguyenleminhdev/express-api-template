@@ -4,8 +4,8 @@
  * 
  ******************************************************************************/
 
-const morgan = require('morgan')
 
+const morgan = require('morgan')
 const HTTP_LOG = morgan(
     'dev',
     {
@@ -15,4 +15,9 @@ const HTTP_LOG = morgan(
     }
 )
 
-App.use(HTTP_LOG)
+
+module.exports = proceed => {
+    App.use(HTTP_LOG)
+
+    proceed()
+}
