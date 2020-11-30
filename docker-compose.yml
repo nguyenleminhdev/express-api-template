@@ -1,8 +1,8 @@
 version: "3.3"
 
 services:
-  eatjs-v2.1:
-    container_name: eatjs-v2.1
+  express-api-template:
+    container_name: express-api-template
     build: ./server/
     volumes:
       - ./server:/server
