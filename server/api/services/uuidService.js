@@ -1,5 +1,5 @@
-const uuid = require('uuid')
+// const uuid = require('uuid')
 
-module.exports = {
-    generate: () => uuid.v4().replace(/-/g, '')
-}
+// module.exports = {
+//     generate: () => uuid.v4().replace(/-/g, '')
+// }

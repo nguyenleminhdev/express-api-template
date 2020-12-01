@@ -10,7 +10,7 @@
 
 const { format, createLogger, transports } = require('winston')
 const { printf, combine, errors, json, colorize, simple } = format
-const winston_elasticsearch = require('winston-elasticsearch')
+// const winston_elasticsearch = require('winston-elasticsearch')
 const elasticsearch = require('elasticsearch')
 
 
