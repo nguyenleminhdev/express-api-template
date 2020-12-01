@@ -10,6 +10,8 @@
  ******************************************************************************/
 
 console.clear()
+console.log('[+]Start init server...')
+
 
 require('./configs/global')
 async.waterfall([
@@ -27,6 +29,8 @@ async.waterfall([
 ], (e, r) => {
     if (e) return log.error(`Start Server error: ${e}`)
 
+    console.clear()
+    console.log('Eat.js v3.3.0')
     console.table(init_log)
-    log.info('Start server successfully!')
+    log.info('**Server listening successfully!**')
 })

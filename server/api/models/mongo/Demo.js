@@ -18,4 +18,8 @@ let DemoSchema = new MONGODB.DB_1.Schema(
     }
 )
 
+// DemoSchema.index({ fb_page_id: 1 }, { unique: 1 })
+// DemoSchema.index({ fb_page_id: 1, fb_client_id: 1 }, { unique: 1 })
+// DemoSchema.index({ fb_client_id: 1 }, { expireAfterSeconds: 0 })
+
 global.Demo = MONGODB.DB_1.model('Demo', DemoSchema)

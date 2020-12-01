@@ -28,17 +28,17 @@ module.exports = proceed => {
         .filter(n => n.includes('.js'))
         .forEach(n => require(path.resolve(n)))
     glob
-        .sync(['api/requests/**'])
+        .sync(['core/requests/**'])
         .filter(n => n.includes('.js'))
         .forEach(n => {
-            const REQUEST_NAME = n.replace('api/requests/', '').replace('.js', '')
+            const REQUEST_NAME = n.replace('core/requests/', '').replace('.js', '')
             App.request[REQUEST_NAME] = require(path.resolve(n))
         })
     glob
-        .sync(['api/responses/**'])
+        .sync(['core/responses/**'])
         .filter(n => n.includes('.js'))
         .forEach(n => {
-            const RESPONSE_NAME = n.replace('api/responses/', '').replace('.js', '')
+            const RESPONSE_NAME = n.replace('core/responses/', '').replace('.js', '')
             App.response[RESPONSE_NAME] = require(path.resolve(n))
         })
     // IMPORT HELPER FUNCTIONS
@@ -84,5 +84,6 @@ module.exports = proceed => {
     ////////////////////////
 
 
+    console.log('=> Loading router api successfully')
     proceed()
 }

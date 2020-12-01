@@ -19,5 +19,6 @@ const HTTP_LOG = morgan(
 module.exports = proceed => {
     App.use(HTTP_LOG)
 
+    console.log('=> Logging all http request successfully')
     proceed()
 }

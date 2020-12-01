@@ -94,4 +94,7 @@ if (Constant.LOG.ES_TRANSPORT)
 ///////////////
 
 
-module.exports = proceed => proceed()
+module.exports = proceed => {
+    console.log('=> Init winston logger successfully')
+    proceed()
+}

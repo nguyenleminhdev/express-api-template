@@ -11,5 +11,6 @@ module.exports = proceed => {
         .filter(n => n.includes('.js'))
         .forEach(n => require(path.resolve(n)))
 
+    console.log('=> Init database model successfully')
     proceed()
 }

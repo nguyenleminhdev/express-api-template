@@ -1,0 +1,1 @@
+# ghi chú về các redis đã được sử dụng
