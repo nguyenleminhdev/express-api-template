@@ -89,3 +89,4 @@ lib-cov
 *.log
 *.out
 *.pid
+package-lock.json
