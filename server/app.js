@@ -29,7 +29,6 @@ async.waterfall([
 ], (e, r) => {
     if (e) return log.error(`Start Server error: ${e}`)
 
-    console.clear()
     console.log('Eat.js v3.3.0')
     console.table(init_log)
     log.info('**Server listening successfully!**')

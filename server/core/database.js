@@ -18,11 +18,11 @@ module.exports = proceed => {
     // GET HANDLE DATABASE FUNCTION
     ///////////////////////////////
     glob
-        .sync(['configs/database/**'])
+        .sync(['core/database/**'])
         .filter(n => n.includes('.js'))
         .forEach(n => {
             const TYPE = n
-                .replace('configs/database/', '')
+                .replace('core/database/', '')
                 .replace('.js', '')
                 .toLowerCase()
 

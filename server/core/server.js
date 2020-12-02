@@ -11,7 +11,7 @@ module.exports = proceed => {
         (cb) => {
             if (SOCKET === 'none') return cb()
 
-            require(`../configs/socket/${SOCKET}`)(cb)
+            require(`../core/socket/${SOCKET}`)(cb)
         },
         (cb) => {
             Server
