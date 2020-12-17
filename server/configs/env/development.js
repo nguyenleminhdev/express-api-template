@@ -28,7 +28,9 @@ global.Constant = {
     APP: {
         HOST: process.env.HOST || '0.0.0.0',
         PORT: process.env.PORT || 1337,
-        SOCKET: 'none' // none | web-socket | socket.io
+        SOCKET: 'none', // * no socket addon
+        // SOCKET: 'web-socket', // * addon web socket
+        // SOCKET: 'socket.io', // * addon socket.io
     },
 
     /***************************************************************************

@@ -1,4 +1,5 @@
 /*******************************************************************************
+ * 
  * * Global Variable Configuration
  * 
  * Configure which global variables which will be exposed automatically.
@@ -26,6 +27,6 @@ global._ = require('lodash')
 /////////////////////
 // YOUR GLOBAL MODULE
 /////////////////////
-// global.xxx = require('xxx)
+// * global.your_module = require('your_module')
 // YOUR GLOBAL MODULE
 /////////////////////

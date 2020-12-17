@@ -1,5 +1,7 @@
 /*******************************************************************************
+ * 
  * * Server config
+ * 
  ******************************************************************************/
 
 
@@ -8,12 +10,12 @@ const SOCKET = Constant.APP.SOCKET || 'none'
 
 module.exports = proceed => {
     async.waterfall([
-        (cb) => {
+        (cb) => { // * import socket if exist
             if (SOCKET === 'none') return cb()
 
             require(`../core/socket/${SOCKET}`)(cb)
         },
-        (cb) => {
+        (cb) => { // * start server
             Server
                 .listen(Constant.APP.PORT, Constant.APP.HOST, () => {
                     const PATH = `http://${Constant.APP.HOST}:${Constant.APP.PORT}`

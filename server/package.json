@@ -20,6 +20,8 @@
     "morgan": "^1.10.0",
     "redis": "^3.0.2",
     "winston": "^3.3.3",
-    "winston-elasticsearch": "^0.12.2"
+    "winston-elasticsearch": "^0.7.0",
+    "ws": "^7.4.1",
+    "socket.io": "^3.0.4"
   }
 }

@@ -1,5 +1,7 @@
 /*******************************************************************************
+ * 
  * * Router config
+ * 
  ******************************************************************************/
 
 
@@ -64,9 +66,9 @@ module.exports = proceed => {
     ///////////////////
 
 
-    ////////////////////////
-    // HANDLE API CONTROLLER
-    ////////////////////////
+    /////////////////////////
+    // AUTO ROUTER CONTROLLER
+    /////////////////////////
     glob
         .sync(['api/controllers/**'])
         .filter(n => n.includes('Controller.js'))
@@ -80,8 +82,8 @@ module.exports = proceed => {
                 Router.all(`${FIRST_PATH}${API}`, API_CONTROLLER)
             }
         })
-    // HANDLE API CONTROLLER
-    ////////////////////////
+    // AUTO ROUTER CONTROLLER
+    /////////////////////////
 
 
     console.log('=> Loading router api successfully')

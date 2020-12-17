@@ -1,5 +1,4 @@
 // const jsonwebtoken = require('jsonwebtoken')
-// const jwt_decode = require('jwt-decode')
 
 // module.exports = {
 //     generate: (
@@ -23,11 +22,5 @@
 //             )
 //     },
 
-//     payload: (
-//         token,
-//         next
-//     ) => {
-//         try { next(null, jwt_decode(token)) }
-//         catch (e) { next(e) }
-//     },
+//     decode: token => jsonwebtoken.decode(token)
 // }

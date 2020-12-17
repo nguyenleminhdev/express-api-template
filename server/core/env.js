@@ -13,7 +13,7 @@ module.exports = proceed => {
     try {
         require(ENV_PATH)
 
-        console.log('=> Loading server config successfully')
+        console.log('=> Loading server config file successfully')
         proceed()
     } catch (e) {
         proceed(e.message)

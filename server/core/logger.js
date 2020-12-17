@@ -37,7 +37,8 @@ const ES_TRANFORMER = log_data => {
 // HELPER FUNCTIONS
 ///////////////////
 const JSON_FORMAT = printf(info => {
-    if (typeof info.message === 'object') info.message = JSON.stringify(info.message, null, 4)
+    if (typeof info.message === 'object') 
+        info.message = JSON.stringify(info.message, null, 4)
     return info
 })
 const CONSOLE_TRANSPORT = new transports.Console({

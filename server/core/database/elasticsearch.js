@@ -13,7 +13,7 @@ module.exports = (database_name, connection_string, proceed) => {
 
     ES_CLIENT.ping(
         { requestTimeout: 3000 },
-        e => (e) ? proceed(e) : proceed()
+        e => require('../../configs/database/elasticsearch')(ES_CLIENT, e, proceed)
     )
 
     ELASTICSEARCH[database_name] = ES_CLIENT

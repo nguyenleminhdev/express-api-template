@@ -35,22 +35,22 @@ module.exports = proceed => {
 
             ELASTICSEARCH[DB_NAME]
                 .indices
-                .create(
-                    {
-                        index: INDEX,
-                        body: {
-                            mappings: {
-                                default: {
-                                    properties: PROPERTIES
-                                }
+                .create({
+                    index: INDEX,
+                    body: {
+                        mappings: {
+                            default: {
+                                properties: PROPERTIES
                             }
                         }
-                    },
-                    (e, r, s) => {
-                        if (e && e.message.includes('resource_already_exists_exception')) return
-                        if (e) log.error(e.message)
                     }
-                )
+                }, (e, r, s) => {
+                    if (
+                        e &&
+                        e.message.includes('resource_already_exists_exception')
+                    ) return
+                    if (e) log.error(e.message)
+                })
         })
     // ELASTICSEARCH
     ////////////////

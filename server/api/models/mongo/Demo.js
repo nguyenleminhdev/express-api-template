@@ -1,16 +1,40 @@
 /*******************************************************************************
+ * 
  * * Demo schema
+ * 
  ******************************************************************************/
 
-let DemoSchema = new MONGODB.DB_1.Schema(
+
+let Demo2Schema = new mongoose.Schema(
     {
-        page_id: {
+        fb_page_id: {
             type: String,
             required: true
         },
-        client_id: {
+        fb_staff_id: {
             type: String,
             required: true
+        },
+        group_staff: {
+            type: ObjectId
+        },
+    },
+    {
+        timestamps: false
+    }
+)
+
+let DemoSchema = new mongoose.Schema(
+    {
+        fb_page_id: {
+            type: String,
+            required: true
+        },
+        fb_staff_id: {
+            type: Demo2Schema,
+        },
+        group_staff: {
+            type: [ObjectId]
         },
     },
     {

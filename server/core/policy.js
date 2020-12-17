@@ -44,5 +44,6 @@ const EXEC_POLICY = (policies, father_path = '', proceed) => {
 
 module.exports = proceed => {
     console.log('=> Init router policy successfully')
+
     EXEC_POLICY(Constant.POLICIES, '', proceed)
 }
