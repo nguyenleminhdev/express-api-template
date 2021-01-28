@@ -90,3 +90,6 @@ lib-cov
 *.log
 *.out
 *.pid
+
+public/*
+!public/.gitkeep 
