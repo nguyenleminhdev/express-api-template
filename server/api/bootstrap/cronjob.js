@@ -1,17 +1,16 @@
-/*******************************************************************************
- * 
- * * Cronjob schedule
- * 
- ******************************************************************************/
+// /*******************************************************************************
+//  * 
+//  * * Cronjob schedule
+//  * 
+//  ******************************************************************************/
 
 
 // const { isMaster } = require('cluster')
+// const cronjob = require('cron').CronJob
 
 
-// module.exports = self => {
-//     if (!isMaster && process.env.NODE_APP_INSTANCE !== '0') return
+// if (!isMaster && process.env.NODE_APP_INSTANCE !== '0') return
 
-//     new self.cronjob('* * * * * *', () => {
-//         // * code here
-//     }, null, true, 'Asia/Ho_Chi_Minh')
-// }
+// new cronjob('* * * * *', () => {
+//     // * code here
+// }, null, true, 'Asia/Ho_Chi_Minh')
