@@ -161,7 +161,7 @@ global.Constant = {
         PREFIX: '/v1',
     },
 
-    // JWT: {
+    // JWT: { // openssl rand -base64 32
     //     SECRET: '123456',
     //     TIME: 60 * 60 * 24 * 30 * 12 * 2 // 2 year
     // },
