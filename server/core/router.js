@@ -51,7 +51,13 @@ module.exports = proceed => {
     // HANDLE API ERROR
     ///////////////////
     App.all('/', (req, res) => res.ok('This server is running'))
-    App.use((req, res, next) => res.err('Api not found', 404))
+    App.use((req, res, next) => {
+        res.err({
+            path: req.url,
+            method: req.method,
+            message: 'Api not found'
+        }, 404)
+    })
     App.use((err, req, res, next) => {
         log.log({
             level: 'error',
