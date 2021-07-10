@@ -4,9 +4,7 @@
  * 
  ******************************************************************************/
 
-
 const ws = require('ws')
-
 
 module.exports = proceed => {
     ////////////////////
@@ -17,7 +15,6 @@ module.exports = proceed => {
     require('../../configs/socket/web-socket')
     // WEB SOCKET DEFINE
     ////////////////////
-
 
     init_log.push({
         type: 'Web Socket',

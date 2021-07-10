@@ -3,6 +3,6 @@
  ******************************************************************************/
 
 module.exports = (req, res, proceed) => {
-    console.log('check admin')
+    console.log('check admin policy work')
     proceed()
 }

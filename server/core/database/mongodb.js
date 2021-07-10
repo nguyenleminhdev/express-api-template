@@ -4,11 +4,6 @@
  * 
  ******************************************************************************/
 
-
-global.mongoose = require('mongoose')
-global.ObjectId = mongoose.Schema.Types.ObjectId
-
-
 module.exports = (database_name, connection_string, proceed) => {
     let mongodb_instance = new mongoose.Mongoose()
 

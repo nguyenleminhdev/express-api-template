@@ -7,11 +7,15 @@
  * 
  ******************************************************************************/
 
-
 /////////////////
 // DEFAULT MODULE
 /////////////////
 global.init_log = []
+global.MONGODB = {}
+global.REDIS = {}
+global.ELASTICSEARCH = {}
+global.mongoose = require('mongoose')
+global.ObjectId = mongoose.Schema.Types.ObjectId
 global.glob = require('glob-all')
 global.express = require('express')
 global.App = express()
@@ -23,10 +27,16 @@ global._ = require('lodash')
 // DEFAULT MODULE
 /////////////////
 
-
 /////////////////////
 // YOUR GLOBAL MODULE
 /////////////////////
 // * global.your_module = require('your_module')
 // YOUR GLOBAL MODULE
+/////////////////////
+
+/////////////////////
+// SHARE ENV CONSTANT
+/////////////////////
+// * global.something = 'some string or number'
+// SHARE ENV CONSTANT
 /////////////////////

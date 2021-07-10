@@ -1,13 +1,24 @@
 {
-  "name": "server",
-  "version": "1.0.0",
-  "description": "",
+  "name": "eatjs",
+  "version": "3.0.1",
+  "description": "Express api template",
+  "keywords": [
+    "EXPRESS",
+    "API",
+    "TEMPLATE"
+  ],
+  "homepage": "https://github.com/nguyenleminhdev/express-api-template",
+  "author": "Thien Minh <nguyenleminhdev@gmail.com> (http://barnyrubble.tumblr.com/) (https://www.facebook.com/lillightn/)",
+  "repository": "github:nguyenleminhdev/express-api-template",
+  "license": "ISC",
   "main": "app.js",
   "scripts": {
-    "start": "nodemon app.js"
+    "start": "nodemon app.js",
+    "dev": "NODE_ENV=development nodemon app.js",
+    "staging": "NODE_ENV=staging node app.js",
+    "prod": "NODE_ENV=production node app.js",
+    "test": "jest"
   },
-  "author": "",
-  "license": "ISC",
   "dependencies": {
     "async": "^3.2.0",
     "body-parser": "^1.19.0",
@@ -23,5 +34,9 @@
     "winston-elasticsearch": "^0.7.0",
     "ws": "^7.4.1",
     "socket.io": "^3.0.4"
+  },
+  "devDependencies": {
+    "jest": "^27.0.3",
+    "supertest": "^6.1.3"
   }
 }

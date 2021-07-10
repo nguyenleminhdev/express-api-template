@@ -1,8 +1,13 @@
 /*******************************************************************************
- * * Check token
+ * 
+ * * /test/
+ * 
  ******************************************************************************/
 
-module.exports = (req, res, proceed) => {
-    console.log('check token')
-    proceed()
+module.exports = {
+    'ping': (req, res) => {
+        let p = req.allParams()
+
+        res.ok(p)
+    },
 }

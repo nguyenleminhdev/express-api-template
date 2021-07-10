@@ -28,7 +28,8 @@ global.Constant = {
     APP: {
         HOST: process.env.HOST || '0.0.0.0',
         PORT: process.env.PORT || 1337,
-        SOCKET: 'none', // * no socket addon
+        LIMIT_BODY: '1mb'
+        // SOCKET: 'none', // * no socket addon
         // SOCKET: 'web-socket', // * addon web socket
         // SOCKET: 'socket.io', // * addon socket.io
     },
@@ -45,7 +46,7 @@ global.Constant = {
     POLICIES: {
         '*': true,
         public: true,
-        app: 'checkToken',
+        app: 'checkApp',
         admin: ['checkAdmin']
     },
 
@@ -82,7 +83,7 @@ global.Constant = {
         *
          **********************************************************************/
         REDIS: {
-            // DB_1: 'redis://0.0.0.0:6379/0',
+            DB_1: 'redis://0.0.0.0:6379/0',
             // DB_2: 'redis://0.0.0.0:6379/1',
         },
 
@@ -129,19 +130,15 @@ global.Constant = {
      * * Configure your security settings for development.
      * 
      **************************************************************************/
-    CORS: {
-        // origin: [
-        //     /\.google\.com$/,
-        //     /\.sapo\.vn$/,
-        // ],
-        // methods: [
-        //     'OPTIONS'
-        // ],
-        // allowedHeaders: [
-        //     'Authorization',
-        //     'Content-Type'
-        // ]
-    },
+    // CORS: {
+    //     origins: [
+    //         'botbanhang.vn',
+    //         'https://tinhtutong.com'
+    //     ],
+    //     methods: [
+    //         'OPTIONS',
+    //     ],
+    // },
 
     /***************************************************************************
      * 

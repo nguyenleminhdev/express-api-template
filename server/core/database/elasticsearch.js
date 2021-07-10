@@ -4,9 +4,7 @@
  * 
  ******************************************************************************/
 
-
 const elasticsearch = require('elasticsearch')
-
 
 module.exports = (database_name, connection_string, proceed) => {
     const ES_CLIENT = elasticsearch.Client({ hosts: connection_string })

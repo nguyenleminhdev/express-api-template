@@ -1,67 +1,32 @@
-# EXPRESS API TEMPLATE V3
+# Eat.js v3.1
 
-## I. Api Document
+## Features
+- Require module golbal (v)
+- Munti environments (v)
+- Static server file (v)
+- Cors config (v)
+- Json body parser default (v)
+- Log all api request (v)
+- Log to ELK (v)
+- Implement mongodb database (v)
+- Implement redis database (v)
+- Implement elasticsearch database (v)
+- Database pre connect script (v)
+- Implement mongodb schema (v)
+- Sub folder schema (v)
+- Policies config (v)
+- Auto require modules (v)
+- Router config (v)
+- Implement socket.io (v)
+- Implement web-socket (v)
+- Socket pre connect script (v)
+- default controllers (v)
+- default policies (v)
+- controllers sub folders (v)
 
-***
-
----
-
-### 1. API NAME
-
-```http
-POST {{host}}/path/of/api
-```
-
-**Properties**
-
-| Properties | Type | Description |
-| :--- | :--- | :--- |
-| `test` | String | `TEST_1` `TEST_2` `TEST_3` |
-
-**Header**
-
-| Header | Type | Description/Value | 
-| :--- | :--- | :--- |
-| `Authorization` | String | Token |
-
-***
-
-**a. `test` TEST_1**
-
-Do something
-
-**Properties**
-
-| Properties | Type | Description |
-| :--- | :--- | :--- |
-| `test` | String | test |
-
-**Response**
-
-| Properties | Type | Description |
-| :--- | :--- | :--- |
-| `code` | Number | 200 |
-| `data` | Object | *data* object |
-
-_data_
-
-| Properties | Type | Description |
-| :--- | :--- | :--- |
-| `test` | String | test |
-
-**Error**
-
-| Properties | Type | Description |
-| :--- | :--- | :--- |
-| `code` | Number | 403 |
-| `message` | String | error message |
-
-_message_
-
-| Code | Message |
-| :--- | :--- |
-| `TEST` | test |
-
-***
-
----
+## Incoming
+- reponse factory
+- error factory
+- bin command for init
+- merge self v1 for both working
+- add some service default demo

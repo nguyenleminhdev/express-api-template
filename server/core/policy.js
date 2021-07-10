@@ -4,7 +4,6 @@
  * 
  ******************************************************************************/
 
-
 const POLICY_ROUTER = (policy, father_path, setting, proceed) => {
     try {
         let router_middleware = setting.map(n => require(`../api/policies/${n}`))
@@ -41,9 +40,8 @@ const EXEC_POLICY = (policies, father_path = '', proceed) => {
     }, e => (e) ? proceed(e) : proceed())
 }
 
-
-module.exports = proceed => {
+module.exports = proceed => {    
     console.log('=> Init router policy successfully')
-
+    
     EXEC_POLICY(Constant.POLICIES, '', proceed)
 }

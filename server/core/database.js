@@ -4,61 +4,38 @@
  * 
  ******************************************************************************/
 
-
-global.MONGODB = {}
-global.REDIS = {}
-global.ELASTICSEARCH = {}
-
-
 module.exports = proceed => {
-    const PROCESS = {}
+    const DATA = {}
+    async.waterfall([
+        cb => { // * get handle database function
+            DATA.db_helper = glob
+                .sync(['core/database/**'])
+                .filter(n => n.includes('.js'))
 
+            async.eachOfLimit(DATA.db_helper, 1, (n, i, next) => {
+                const DB_TYPE = n
+                    .replace('core/database/', '')
+                    .replace('.js', '')
+                    .toLowerCase()
 
-    ///////////////////////////////
-    // GET HANDLE DATABASE FUNCTION
-    ///////////////////////////////
-    glob
-        .sync(['core/database/**'])
-        .filter(n => n.includes('.js'))
-        .forEach(n => {
-            const TYPE = n
-                .replace('core/database/', '')
-                .replace('.js', '')
-                .toLowerCase()
+                DATA[DB_TYPE] = require(path.resolve(n))
 
-            PROCESS[TYPE] = require(path.resolve(n))
-        })
-    // GET HANDLE DATABASE FUNCTION
-    ///////////////////////////////
+                next()
+            }, cb)
+        },
+        cb => { // * init database
+            async.eachOfLimit(Constant.DATABASE, 1, (v, k, next) => {
+                async.eachOfLimit(v, 1, (_v, _k, _cb) => {
+                    const EXEC = DATA[k.toLowerCase()]
 
-
-    ////////////////
-    // INIT DATABASE
-    ////////////////
-    async.eachOfLimit(
-        Constant.DATABASE,
-        1,
-        (list_connection_string, database_type, cb) => {
-            async.eachOfLimit(
-                list_connection_string,
-                1,
-                (connection_string, database_name, _cb) => {
-                    const EXEC = PROCESS[database_type.toLowerCase()]
-                    EXEC(database_name, connection_string, (e, r) => {
+                    EXEC(_k, _v, (e, r) => {
                         if (e) return _cb(e)
 
-                        init_log.push({
-                            type: database_type,
-                            address: connection_string
-                        })
+                        init_log.push({ type: k, address: _v })
                         _cb()
                     })
-                },
-                e => (e) ? cb(e) : cb()
-            )
-        },
-        e => (e) ? proceed(e) : proceed()
-    )
-    // INIT DATABASE
-    ////////////////
+                }, next)
+            }, cb)
+        }
+    ], proceed)
 }

@@ -4,20 +4,19 @@
  * 
  ******************************************************************************/
 
-
 const socket_io = require('socket.io')
-
 
 module.exports = proceed => {
     ///////////////////
     // SOCKET IO DEFINE
     ///////////////////
-    global.io = socket_io(Server)
+    global.io = socket_io(Server, {
+        allowEIO3: true
+    })
 
     require('../../configs/socket/socket.io')
     // SOCKET IO DEFINE
     ///////////////////
-
 
     init_log.push({
         type: 'Socket.IO',

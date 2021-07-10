@@ -4,94 +4,65 @@
  * 
  ******************************************************************************/
 
-
 module.exports = proceed => {
-    /////////////
-    // PREFIX API
-    /////////////
-    App.use(Constant.ROUTER.PREFIX, Router)
-    // PREFIX API
-    /////////////
+    const DATA = {}
+    async.waterfall([
+        cb => { // * prefix config
+            App.use(Constant.ROUTER.PREFIX, Router)
 
+            cb()
+        },
+        cb => { // * handle error global
+            App.all('/', (req, res) => res.ok('This server is running'))
 
-    //////////////////////////
-    // IMPORT HELPER FUNCTIONS
-    //////////////////////////
-    glob
-        .sync(['api/services/**'])
-        .filter(n => n.includes('.js'))
-        .forEach(n => {
-            if (!n.includes('Service.js')) return
-            const SERVICE_NAME = n.replace('api/services/', '').replace('.js', '')
-            global[SERVICE_NAME] = require(path.resolve(n))
-        })
-    glob
-        .sync(['api/bootstrap/**'])
-        .filter(n => n.includes('.js'))
-        .forEach(n => require(path.resolve(n)))
-    glob
-        .sync(['core/requests/**'])
-        .filter(n => n.includes('.js'))
-        .forEach(n => {
-            const REQUEST_NAME = n.replace('core/requests/', '').replace('.js', '')
-            App.request[REQUEST_NAME] = require(path.resolve(n))
-        })
-    glob
-        .sync(['core/responses/**'])
-        .filter(n => n.includes('.js'))
-        .forEach(n => {
-            const RESPONSE_NAME = n.replace('core/responses/', '').replace('.js', '')
-            App.response[RESPONSE_NAME] = require(path.resolve(n))
-        })
-    // IMPORT HELPER FUNCTIONS
-    //////////////////////////
+            App.use((req, res, next) => {
+                res.err({
+                    path: req.url,
+                    method: req.method,
+                    message: 'Api not found'
+                }, 404)
+            })
 
+            App.use((err, req, res, next) => {
+                if (err === 'CORS') return res.err(err, 500)
 
-    ///////////////////
-    // HANDLE API ERROR
-    ///////////////////
-    App.all('/', (req, res) => res.ok('This server is running'))
-    App.use((req, res, next) => {
-        res.err({
-            path: req.url,
-            method: req.method,
-            message: 'Api not found'
-        }, 404)
-    })
-    App.use((err, req, res, next) => {
-        log.log({
-            level: 'error',
-            message: err.message,
-            path: req.url,
-            method: req.method,
-            data: JSON.stringify({ ...req.query, ...req.body }, null, 4)
-        })
-        res.err(err.message, 500)
-    })
-    // HANDLE API ERROR
-    ///////////////////
+                log.log({
+                    level: 'error',
+                    message: err.message,
+                    path: req.url,
+                    method: req.method,
+                    data: JSON.stringify({ ...req.query, ...req.body }, null, 4)
+                })
+                res.err(err.message, 500)
+            })
 
+            cb()
+        },
+        cb => { // * auto load controllers
+            DATA.controllers = glob
+                .sync(['api/controllers/**'])
+                .filter(n => n.includes('Controller.js'))
 
-    /////////////////////////
-    // AUTO ROUTER CONTROLLER
-    /////////////////////////
-    glob
-        .sync(['api/controllers/**'])
-        .filter(n => n.includes('Controller.js'))
-        .forEach(n => {
-            const FIRST_PATH = n.replace('api/controllers/', '/').replace('Controller.js', '/')
-            const LIST_API = require(path.resolve(n))
+            async.eachOfLimit(DATA.controllers, 1, (n, i, next) => {
+                const FIRST_PATH = n
+                    .replace('api/controllers/', '/')
+                    .replace('Controller.js', '/')
 
-            for (API in LIST_API) {
-                const API_CONTROLLER = LIST_API[API]
+                const LIST_API = require(path.resolve(n))
 
-                Router.all(`${FIRST_PATH}${API}`, API_CONTROLLER)
-            }
-        })
-    // AUTO ROUTER CONTROLLER
-    /////////////////////////
+                async.eachOfLimit(LIST_API, 1, (v, k, _next) => {
+                    const API_CONTROLLER = LIST_API[k]
 
+                    Router.all(`${FIRST_PATH}${k}`, API_CONTROLLER)
 
-    console.log('=> Loading router api successfully')
-    proceed()
+                    _next()
+                }, next)
+            }, cb)
+        },
+        cb => { // * alert
+            console.log('=> Loading router api successfully')
+
+            cb()
+        }
+    ], e => proceed(e))
 }

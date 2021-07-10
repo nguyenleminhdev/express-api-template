@@ -1,12 +1,8 @@
 /*******************************************************************************
- * 
- * * /admin/
- * 
+ * * Check token
  ******************************************************************************/
 
-module.exports = {
-    'ping': (req, res) => {
-        let p = req.allParams()
-        res.ok(p)
-    },
+module.exports = (req, res, proceed) => {
+    console.log('check app policy work')
+    proceed()
 }
